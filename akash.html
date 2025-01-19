@@ -6,6 +6,16 @@
     <title>Profit</title>
 </head>
 <body>
-    <p><h1>welcome to see our buisness model</h1></p>
+    <p><h1>Transaction history inbetween dates</h1></p>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="start_date">Start date</label>
+        <input type="date" name="start_date" id="start_date" required><br><br>
+
+        <label for="end_date">End date</label>
+        <input type="date" name="end_date" id="end_date"><br><br>
+
+        <button type="submit">submit</button>
+    </form>
 </body>
 </html>

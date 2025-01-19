@@ -175,3 +175,22 @@ def expenses_history_view(request):
 def additem_history_view(request):
     additem=AddItem.objects.all()
     return render(request,"additem_history.html",{'context':additem})
+
+from datetime import datetime
+def statement_view(request):
+    if request.method=='POST':
+        start_date=request.POST['start_date']
+        end_date=request.POST['end_date']
+        start_date = datetime.strptime(start_date, "%Y-%m-%d").date()
+        end_date = datetime.strptime(end_date, "%Y-%m-%d").date()
+        # print(start_date)
+        # print(end_date)
+        trans_history=Transactions.objects.filter(sale_date__date__range=(start_date,end_date))
+        expens_history=Expenses.objects.filter(expenses_date__date__range=(start_date,end_date))
+        additem_history=AddItem.objects.filter(item_date__date__range=(start_date,end_date))
+        return render(request,"statement.html",{
+            'context1':trans_history,
+            'context2':expens_history,
+            'context3':additem_history
+        })
+    return render(request,"statement.html")
