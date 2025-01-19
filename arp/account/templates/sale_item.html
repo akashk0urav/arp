@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saling</title>
+</head>
+<body>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {% if messages %}
+           <ul>
+               {% for message in messages %}
+                   <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <label for="item_name">Item Name:</label>
+        <input type="text" id="item_name" name="item_name" value="{{ context.item_name }}" required><br><br>
+
+        <label for="item_size">Item Size:</label>
+        <input type="text" id="item_size" name="item_size" value="{{ context.item_size }}" required><br><br>
+
+        <label for="item_category">Item Category:</label>
+        <select id="item_category" name="item_category" required>
+          <option value="Shirts" {% if context.item_category == "Shirts" %}selected{% endif %}>Shirts</option>
+          <option value="Pants" {% if context.item_category == "Pants" %}selected{% endif %}>Pants</option>
+          <option value="Jacket" {% if context.item_category == "Jacket" %}selected{% endif %}>Jacket</option>
+          <option value="Other" {% if context.item_category == "Other" %}selected{% endif %}>Other</option>
+        </select><br><br>
+
+        <label for="quantity_sold">Item Count:</label>
+        <input type="number" id="quantity_sold" name="quantity_sold"  required><br><br>
+
+        <label for="item_category">Payment mode:</label>
+        <select id="payment_mode" name="payment_mode">
+            <option value="Online">Online</option>
+            <option value="Offline">Offline</option>
+            <option value="Both">Both</option>
+        </select><br><br>
+
+        <label for="selling_price_online">Selling price Online:</label>
+        <input type="number" id="selling_price_online" name="selling_price_online" required><br><br>
+
+        <label for="selling_price_offline">Selling price Offline:</label>
+        <input type="number" id="selling_price_offline" name="selling_price_offline" required><br><br>
+        
+
+        <button type="submit">Sale</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profit</title>
+</head>
+<body>
+    <p><h1>welcome to see our buisness model</h1></p>
+    <h1>All Profit</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Expenditures on Clothes</th>
+                <th>Expenditures on Shop</th>
+                <th>Expenditures on Shopkeeper</th>
+                <th>Expenditures on Other</th>
+                <th>Gross Earning</th>
+                <th>Gross Profit</th>
+                <th>Amount on Counter</th>
+                <th>Amount on Bank</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for profit in context %}
+            <tr>
+                <td>{{ profit.total_expenses_on_clothes }}</td>
+                <td>{{ profit.total_expenses_on_shop }}</td>
+                <td>{{ profit.total_expenses_on_shopkeeper }}</td>
+                <td>{{ profit.total_expenses_on_other }}</td>
+                <td>{{ profit.gross_earning }}</td>
+                <td>{{ profit.gross_profit }}</td>
+                <td>{{ profit.cur_amount_on_counter }}</td>
+                <td>{{ profit.cur_amount_on_bank }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">No transactions found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Transactions</title>
+</head>
+<body>
+    <h1>All Transactions</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Quantity Sold</th>
+                <th>Selling Price online</th>
+                <th>Selling Price offline</th>
+                <th>Payment Mode</th>
+                <th>Sold By</th>
+                <th>Sale Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in context %}
+            <tr>
+                <td>{{ transaction.item.item_name }}</td>
+                <td>{{ transaction.quantity_sold }}</td>
+                <td>{{ transaction.selling_price_online }}</td>
+                <td>{{ transaction.selling_price_offline }}</td>
+                <td>{{ transaction.payment_mode }}</td>
+                <td>{{ transaction.sold_by.first_name }}</td>
+                <td>{{ transaction.sale_date|date:"Y-m-d H:i" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No transactions found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
