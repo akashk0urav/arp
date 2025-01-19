@@ -139,6 +139,12 @@ def expenses_view(request):
         if profit.cur_amount_on_bank>=expense_online and profit.cur_amount_on_counter>=expense_offline :
             profit.cur_amount_on_bank-=(expense_online)
             profit.cur_amount_on_counter-=(expense_offline)
+            if expenses_on=="Shop":
+                profit.total_expenses_on_shop+=(expense_offline+expense_online)
+            if expenses_on=="Shopkeeper":
+                profit.total_expenses_on_shopkeeper+=(expense_offline+expense_online)
+            if expenses_on=="Other":
+                profit.total_expenses_on_other+=(expense_offline+expense_online)
             profit.save()
             expenses=Expenses.objects.create(
                 user_name=user_name,
