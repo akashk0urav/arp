@@ -49,6 +49,15 @@ def additem_view(request):
         item_price=int(request.POST['item_price'])
         profit, created=Profit.objects.get_or_create(id=1)
         profit.total_expenses_on_clothes+=item_price
+        user_name=request.user
+        additem=AddItem.objects.create(
+            user_name=user_name,
+            item_name=item_name,
+            item_size=item_size,
+            item_category=item_category,
+            item_count=item_count,
+            item_price=item_price
+        )
         profit.save()
         if Item.objects.filter(item_name=item_name,item_size=item_size,item_category=item_category).exists():
             item = Item.objects.get(item_name=item_name, item_size=item_size, item_category=item_category)
@@ -104,7 +113,8 @@ def sale_item(request, item_id):
                 selling_price_online=selling_price_online,
                 selling_price_offline=selling_price_offline,
                 payment_mode=payment_mode,
-                sold_by=user_name
+                sold_by=user_name,
+                sale_profit=(selling_price_offline+selling_price_online-quantity_sold*item.item_price)
             )
             return redirect('/')
         else:
@@ -159,5 +169,9 @@ def expenses_view(request):
     return render(request,"expenses.html")
 
 def expenses_history_view(request):
-    expenses_history=Expenses.objects.all();
+    expenses_history=Expenses.objects.all()
     return render(request,"expenses_history.html",{'context':expenses_history})
+
+def additem_history_view(request):
+    additem=AddItem.objects.all()
+    return render(request,"additem_history.html",{'context':additem})

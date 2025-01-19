@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AddItem History</title>
+</head>
+<body>
+    <h1>Add item History</h1>
+    <table border="1">
+        <thead>
+                <th>Item Name</th>
+                <th>Item Size</th>
+                <th>Item Category</th>
+                <th>Item Count</th>
+                <th>Item Price</th>
+                <th>Add By</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in context %}
+            <tr>
+                <td>{{ transaction.item_name }}</td>
+                <td>{{ transaction.item_size }}</td>
+                <td>{{ transaction.item_category }}</td>
+                <td>{{ transaction.item_count }}</td>
+                <td>{{ transaction.item_price }}</td>
+                <td>{{ transaction.user_name.first_name }}</td>
+                <td>{{ transaction.item_date|date:"Y-m-d H:i" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">No Added item found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

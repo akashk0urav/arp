@@ -13,6 +13,21 @@ class Item(models.Model):
     item_category=models.CharField(max_length=50,choices=ITEM_CATEGORIES,default='Other')
     item_count=models.PositiveIntegerField(default=0)
     item_price=models.PositiveIntegerField(default=0,null=True,blank=True)
+class AddItem(models.Model):
+    ITEM_CATEGORIES=[
+        ('Shirt','Shirt'),
+        ('Pants','Pants'),
+        ('Jacket','Jacket'),
+        ('Other','Other'),
+    ]
+    # user_name=models.CharField(max_length=100,null=True,blank=True)
+    user_name=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True)
+    item_name=models.CharField(max_length=100)
+    item_size=models.CharField(max_length=20)
+    item_category=models.CharField(max_length=50,choices=ITEM_CATEGORIES,default='Other')
+    item_count=models.PositiveIntegerField(default=0)
+    item_price=models.PositiveIntegerField(default=0,null=True,blank=True)
+    item_date=models.DateTimeField(auto_now_add=True)
 
 class Transactions(models.Model):
     PAYMENT_MODES=[
@@ -27,6 +42,7 @@ class Transactions(models.Model):
     payment_mode=models.CharField(max_length=20,choices=PAYMENT_MODES,default='Offline')
     sold_by=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True)
     sale_date=models.DateTimeField(auto_now_add=True)
+    sale_profit=models.IntegerField(default=0)
 
 class Profit(models.Model):
     total_expenses_on_clothes=models.PositiveIntegerField(default=0)
@@ -34,7 +50,8 @@ class Profit(models.Model):
     total_expenses_on_shopkeeper=models.PositiveIntegerField(default=0)
     total_expenses_on_other=models.PositiveIntegerField(default=0)
     gross_earning=models.PositiveIntegerField(default=0)
-    gross_profit=models.PositiveIntegerField(default=0)
+    # gross_profit=models.PositiveIntegerField(default=0)
+    gross_profit=models.IntegerField(default=0)
     cur_amount_on_counter=models.PositiveIntegerField(default=0)
     cur_amount_on_bank=models.PositiveIntegerField(default=0)
 class Expenses(models.Model):

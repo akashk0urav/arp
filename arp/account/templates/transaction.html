@@ -16,6 +16,7 @@
                 <th>Selling Price offline</th>
                 <th>Payment Mode</th>
                 <th>Sold By</th>
+                <th>Profit Made</th>
                 <th>Sale Date</th>
             </tr>
         </thead>
@@ -28,6 +29,7 @@
                 <td>{{ transaction.selling_price_offline }}</td>
                 <td>{{ transaction.payment_mode }}</td>
                 <td>{{ transaction.sold_by.first_name }}</td>
+                <td>{{ transaction.sale_profit }}</td>
                 <td>{{ transaction.sale_date|date:"Y-m-d H:i" }}</td>
             </tr>
             {% empty %}
