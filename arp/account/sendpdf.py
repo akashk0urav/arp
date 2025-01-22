@@ -12,6 +12,7 @@ def generate_pdf(transaction,expenses,additems):
         'context3':additems
     })
 
+
     with tempfile.NamedTemporaryFile(delete=False,suffix='.pdf') as output:
         HTML(string=html_string).write_pdf(output.name)
         return output.name
