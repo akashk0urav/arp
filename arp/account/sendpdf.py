@@ -53,6 +53,4 @@ def send_monthly_statement(request):
     email = EmailMessage(subject, message, from_email, recipient_list)
     email.attach_file(pdf_path)
     email.send()
-
-    print("Monthly statement email sent successfully!")
     return HttpResponse("Monthly statement email sent successfully!")
